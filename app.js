@@ -13,7 +13,7 @@ console.log('on waiting');
 button.watch(function(err, value) {
     if (err) exit();
     var current = new Date().getTime();
-    if (current - timestamp > 100){
+    if (current - timestamp > 300){
     	timestamp = current;
     	console.log('button pressed!');
 
@@ -23,6 +23,7 @@ button.watch(function(err, value) {
 	    	//console.log('step ' + stepStatus);
 	    	if (count == 3201){
 	    		clearInterval(iv);
+	    		count = 0;
 	    		console.log('quiting after loop');
 	    	}
 
