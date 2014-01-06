@@ -7,6 +7,7 @@ var iv;
 var stepStatus = 0;
 var timestamp = 0;
 var count = 0;
+var SPEED = 10;
 
 console.log('on waiting');
 
@@ -30,7 +31,7 @@ button.watch(function(err, value) {
 	    	count++;
 	    	step.writeSync(stepStatus === 0 ? 1 : 0); // 1 = on, 0 = off :)
 	    	stepStatus = stepStatus === 0 ? 1 : 0;
-		}, 1);
+		}, SPEED);
     }
 });
 
