@@ -1,5 +1,7 @@
 var Gpio = require('onoff').Gpio,
-    button = new Gpio(0, 'in', 'both');
+    button = new Gpio(11, 'in', 'both');
+
+console.log('on waiting');
 
 button.watch(function(err, value) {
     if (err) exit();
@@ -7,7 +9,7 @@ button.watch(function(err, value) {
 });
 
 function exit() {
-    led.unexport();
+	console.log('quitting');
     button.unexport();
     process.exit();
 }
