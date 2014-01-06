@@ -12,9 +12,9 @@ console.log('on waiting');
 button.watch(function(err, value) {
     if (err) exit();
     var current = new Date().getTime();
-    if (current - timestamp < 100){
+    if (current - timestamp > 100){
     	timestamp = current;
-    	 console.log('button pressed!');
+    	console.log('button pressed!');
 
 	    iv = setInterval(function() {
 	    	console.log('step');
