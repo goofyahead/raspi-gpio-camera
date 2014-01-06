@@ -6,6 +6,7 @@ var direction = new Gpio(23,'out');
 var iv;
 var stepStatus = 0;
 var timestamp = 0;
+var count = 0;
 
 console.log('on waiting');
 
@@ -16,18 +17,19 @@ button.watch(function(err, value) {
     	timestamp = current;
     	console.log('button pressed!');
 
-    	for (i = 0 ; i < 1601 ; i ++){
-    		step.writeSync(0); // 1 = on, 0 = off :)
-			step.writeSync(1);
-    	}
-
     	console.log('done!');
 
-	 //    iv = setInterval(function() {
-	 //    	//console.log('step ' + stepStatus);
-	 //    	step.writeSync(stepStatus === 0 ? 1 : 0); // 1 = on, 0 = off :)
-	 //    	stepStatus = stepStatus === 0 ? 1 : 0;
-		// }, 1);
+	    iv = setInterval(function() {
+	    	//console.log('step ' + stepStatus);
+	    	if (count == 1601){
+	    		clearInterval(iv);
+	    		console.log('quiting after loop');
+	    	}
+
+	    	count++;
+	    	step.writeSync(stepStatus === 0 ? 1 : 0); // 1 = on, 0 = off :)
+	    	stepStatus = stepStatus === 0 ? 1 : 0;
+		}, 1);
     }
 });
 
