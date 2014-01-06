@@ -5,22 +5,28 @@ var step = new Gpio(24,'out');
 var direction = new Gpio(23,'out');
 var iv;
 var stepStatus = 0;
+var timestamp = 0;
 
 console.log('on waiting');
 
 button.watch(function(err, value) {
     if (err) exit();
-    console.log('button pressed!');
+    var current = new Date().getTime();
+    if (current - timestamp < 100){
+    	timestamp = current;
+    	 console.log('button pressed!');
 
-    iv = setInterval(function() {
-    	step.writeSync(stepStatus === 0 ? 1 : 0); // 1 = on, 0 = off :)
-    	stepStatus = stepStatus === 0 ? 1 : 0;
-	}, 200);
-	
+	    iv = setInterval(function() {
+	    	console.log('step');
+	    	step.writeSync(stepStatus === 0 ? 1 : 0); // 1 = on, 0 = off :)
+	    	stepStatus = stepStatus === 0 ? 1 : 0;
+		}, 500);
+    }
 });
 
 function exit() {
 	console.log('quitting');
+	clearInterval(iv);
     button.unexport();
     process.exit();
 }
