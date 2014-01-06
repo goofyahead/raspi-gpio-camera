@@ -21,7 +21,7 @@ button.watch(function(err, value) {
 
 	    iv = setInterval(function() {
 	    	//console.log('step ' + stepStatus);
-	    	if (count == 1601){
+	    	if (count == 3201){
 	    		clearInterval(iv);
 	    		console.log('quiting after loop');
 	    	}
