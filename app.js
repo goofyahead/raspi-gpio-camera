@@ -16,7 +16,7 @@ button.watch(function(err, value) {
     	timestamp = current;
     	console.log('button pressed!');
 
-    	for (i = 0 ; i < 201 ; i ++){
+    	for (i = 0 ; i < 1601 ; i ++){
     		step.writeSync(0); // 1 = on, 0 = off :)
 			step.writeSync(1);
     	}
