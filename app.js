@@ -17,7 +17,7 @@ button.watch(function(err, value) {
     	console.log('button pressed!');
 
 	    iv = setInterval(function() {
-	    	console.log('step');
+	    	console.log('step ' + stepStatus);
 	    	step.writeSync(stepStatus === 0 ? 1 : 0); // 1 = on, 0 = off :)
 	    	stepStatus = stepStatus === 0 ? 1 : 0;
 		}, 500);
