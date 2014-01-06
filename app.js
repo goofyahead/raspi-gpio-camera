@@ -1,5 +1,5 @@
 var Gpio = require('onoff').Gpio,
-    button = new Gpio(17, 'in');
+    button = new Gpio(17, 'in','falling');
 
 console.log('on waiting');
 
