@@ -45,7 +45,7 @@ button.watch(function(err, value) {
 
 	    iv = setInterval(function() {
 	    	//console.log('step ' + stepStatus);
-	    	if (count == 3301){
+	    	if (count == 3801){
 	    		clearInterval(iv);
 	    		count = 0;
 	    		//send sigterm or sigints
