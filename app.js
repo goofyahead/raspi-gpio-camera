@@ -26,7 +26,7 @@ button.watch(function(err, value) {
     	timestamp = current;
     	console.log('button pressed!');
 
-    	child = exec('raspivid -n -vf -w 1280 -h 720 -fps 30 -s -o video' + counter + '.h264 -t 30000',
+    	child = exec('raspivid -n -vf -w 1280 -h 720 -fps 30 -s -o video' + counter + '.h264 -t 5000',
 		function (error, stdout, stderr) {
 		    console.log('stdout: ' + stdout);
 		    console.log('stderr: ' + stderr);
@@ -42,7 +42,7 @@ button.watch(function(err, value) {
 	    		clearInterval(iv);
 	    		count = 0;
 	    		//send sigterm or sigints
-	    		child.kill();
+	    		// child.kill();
 
 	    		console.log('quiting after loop');
 	    	}
