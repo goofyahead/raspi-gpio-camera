@@ -42,7 +42,7 @@ button.watch(function(err, value) {
 	    		clearInterval(iv);
 	    		count = 0;
 	    		//send sigterm or sigints
-	    		// child.kill();
+	    		child.kill();
 
 	    		console.log('quiting after loop');
 	    	}
