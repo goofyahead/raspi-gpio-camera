@@ -14,7 +14,7 @@ console.log('on waiting');
 // var exec = require('child_process').exec,
 //     child;
 
-var spawn = require('child_process').spawn,
+var spawn = require('child_process').spawn;
 
 
 var counter = 0;
