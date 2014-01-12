@@ -34,6 +34,7 @@ button.watch(function(err, value) {
 		      console.log('exec error: ' + error);
 		    }
 		});
+		count++;
 
 	    iv = setInterval(function() {
 	    	//console.log('step ' + stepStatus);
