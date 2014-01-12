@@ -11,21 +11,21 @@ var SPEED = 5;
 
 console.log('on waiting');
 
-var exec = require('child_process').exec,
-    child;
+// var exec = require('child_process').exec,
+//     child;
+
+var spawn = require('child_process').spawn,
+
 
 var counter = 0;
 
 button.watch(function(err, value) {
     if (err) exit();
     //start camera in pause mode, wait for it starts
-	child = exec('raspivid -n -vf -w 1280 -h 720 -fps 30 -s -o video' + counter + '.h264 -t 30000',
-	  function (error, stdout, stderr) {
-	    console.log('stdout: ' + stdout);
-	    console.log('stderr: ' + stderr);
-	    if (error !== null) {
-	      console.log('exec error: ' + error);
-	    }
+	raspivid    = spawn('raspivid -n -vf -w 1280 -h 720 -fps 30 -s -o video' + counter + '.h264 -t 30000');
+
+	raspivid.on('close', function (code) {
+	  console.log('child process exited with code ' + code);
 	});
     //send sigusr1
     var current = new Date().getTime();
@@ -41,7 +41,7 @@ button.watch(function(err, value) {
 	    		clearInterval(iv);
 	    		count = 0;
 	    		//send sigterm or sigints
-	    		child.kill();
+	    		raspivid.kill();
 
 	    		console.log('quiting after loop');
 	    	}
