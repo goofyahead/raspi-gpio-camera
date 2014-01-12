@@ -22,18 +22,18 @@ var counter = 0;
 button.watch(function(err, value) {
     if (err) exit();
     //start camera in pause mode, wait for it starts
-	raspivid    = spawn('raspivid -n -vf -w 1280 -h 720 -fps 30 -s -o video' + counter + '.h264 -t 30000');
-
-	raspivid.on('close', function (code) {
-	  console.log('child process exited with code ' + code);
-	});
+	
     //send sigusr1
     var current = new Date().getTime();
     if (current - timestamp > 300){
     	timestamp = current;
     	console.log('button pressed!');
 
-    	console.log('done!');
+    	raspivid = spawn('raspivid', [ '-n', '-vf' , '-w 1280', '-h 720', '-fps 30', '-s', '-o video' + counter + '.h264', '-t 30000']);
+
+		raspivid.on('close', function (code) {
+		  console.log('child process exited with code ' + code);
+		});
 
 	    iv = setInterval(function() {
 	    	//console.log('step ' + stepStatus);
