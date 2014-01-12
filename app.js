@@ -28,7 +28,7 @@ button.watch(function(err, value) {
     	console.log('button pressed!');
 
     	
-	    var raspivid  = spawn('raspivid', ['-n', '-o', 'video1.h264', '-t', '20000']);
+	    var raspivid  = spawn('raspivid', ['-n', '-o', 'video1.h264', '-t', '20000', '-w', '1280', '-h', '720', '-vf']);
 
 		raspivid.on('close', function (code, signal) {
 		  console.log('child process terminated due to receipt of signal '+signal + ' and code ' + code);
