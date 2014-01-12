@@ -28,26 +28,24 @@ button.watch(function(err, value) {
     	console.log('button pressed!');
 
     	
-	    var raspivid  = spawn('raspivid', ['-n', '-o', 'video1.h264', '-t', '20000', '-w', '1280', '-h', '720', '-vf']);
+	    var raspivid  = spawn('raspivid', ['-n', 
+	    	'-o', 'video1.h264', 
+	    	'-td', '20000,100',
+	    	'-i', 'pause',
+	    	'-w', '1280', 
+	    	'-h', '720', 
+	    	'-fps', '30', 
+	    	'-vf']);
 
 		raspivid.on('close', function (code, signal) {
 		  console.log('child process terminated due to receipt of signal '+signal + ' and code ' + code);
 		});
 
-  //   	child = exec('raspivid -n -vf -w 1280 -h 720 -fps 30 -o video' + counter + '.h264 -t 20000',
-		// function (error, stdout, stderr) {
-		//     console.log('stdout: ' + stdout);
-		//     console.log('stderr: ' + stderr);
-		//     if (error !== null) {
-		//       console.log('exec error: ' + error);
-		//     }
-		// });
-
 		count++;
 
 	    iv = setInterval(function() {
 	    	//console.log('step ' + stepStatus);
-	    	if (count == 3201){
+	    	if (count == 3301){
 	    		clearInterval(iv);
 	    		count = 0;
 	    		//send sigterm or sigints
