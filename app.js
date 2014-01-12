@@ -11,8 +11,23 @@ var SPEED = 10;
 
 console.log('on waiting');
 
+var exec = require('child_process').exec,
+    child;
+
+var counter = 0;
+
 button.watch(function(err, value) {
     if (err) exit();
+    //start camera in pause mode, wait for it starts
+	child = exec('raspivid -n -vf -w 1280 -h 720 -fps 30 -s -o video' + counter + '.h264 -t 30000',
+	  function (error, stdout, stderr) {
+	    console.log('stdout: ' + stdout);
+	    console.log('stderr: ' + stderr);
+	    if (error !== null) {
+	      console.log('exec error: ' + error);
+	    }
+	});
+    //send sigusr1
     var current = new Date().getTime();
     if (current - timestamp > 300){
     	timestamp = current;
@@ -26,6 +41,8 @@ button.watch(function(err, value) {
 	    		clearInterval(iv);
 	    		count = 0;
 	    		console.log('quiting after loop');
+	    		//send sigterm or sigint
+	    		child.kill('SIGTERM');
 	    	}
 
 	    	count++;
