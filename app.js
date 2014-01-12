@@ -26,7 +26,7 @@ button.watch(function(err, value) {
     	timestamp = current;
     	console.log('button pressed!');
 
-    	child = exec('raspivid -n -vf -w 1280 -h 720 -fps 30 -o video' + counter + '.h264 -t 5000',
+    	child = exec('raspivid -n -vf -w 1280 -h 720 -fps 30 -o video' + counter + '.h264 -t 20000',
 		function (error, stdout, stderr) {
 		    console.log('stdout: ' + stdout);
 		    console.log('stderr: ' + stderr);
