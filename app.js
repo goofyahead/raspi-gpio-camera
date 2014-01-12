@@ -11,11 +11,8 @@ var SPEED = 5;
 
 console.log('on waiting');
 
-// var exec = require('child_process').exec,
-//     child;
-
-var spawn = require('child_process').spawn;
-
+var exec = require('child_process').exec,
+    child;
 
 var counter = 0;
 
@@ -29,10 +26,13 @@ button.watch(function(err, value) {
     	timestamp = current;
     	console.log('button pressed!');
 
-    	raspivid = spawn('raspivid', [ '-n', '-vf' , '-w 1280', '-h 720', '-fps 30', '-s', '-o video' + counter + '.h264', '-t 30000']);
-
-		raspivid.on('close', function (code) {
-		  console.log('child process exited with code ' + code);
+    	child = exec('raspivid -n -vf -w 1280 -h 720 -fps 30 -s -o video' + counter + '.h264 -t 30000',
+		function (error, stdout, stderr) {
+		    console.log('stdout: ' + stdout);
+		    console.log('stderr: ' + stderr);
+		    if (error !== null) {
+		      console.log('exec error: ' + error);
+		    }
 		});
 
 	    iv = setInterval(function() {
@@ -41,7 +41,7 @@ button.watch(function(err, value) {
 	    		clearInterval(iv);
 	    		count = 0;
 	    		//send sigterm or sigints
-	    		raspivid.kill();
+	    		child.kill();
 
 	    		console.log('quiting after loop');
 	    	}
