@@ -7,7 +7,7 @@ var iv;
 var stepStatus = 0;
 var timestamp = 0;
 var count = 0;
-var SPEED = 10;
+var SPEED = 5;
 
 console.log('on waiting');
 
@@ -40,9 +40,10 @@ button.watch(function(err, value) {
 	    	if (count == 3201){
 	    		clearInterval(iv);
 	    		count = 0;
+	    		//send sigterm or sigints
+	    		child.kill();
+
 	    		console.log('quiting after loop');
-	    		//send sigterm or sigint
-	    		child.kill('SIGTERM');
 	    	}
 
 	    	count++;
