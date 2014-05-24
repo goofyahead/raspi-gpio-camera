@@ -49,6 +49,8 @@ button.watch(function(err, value) {
 		    		count = 0;
 		    		//send sigterm or sigints
 		    		raspivid.kill();
+		    		button.unexport();
+   					process.exit();
 		    		console.log('quiting after loop');
 		    	}
 
@@ -59,12 +61,3 @@ button.watch(function(err, value) {
 	    	},200);
     }
 });
-
-function exit() {
-	console.log('quitting');
-	clearInterval(iv);
-    button.unexport();
-    process.exit();
-}
-
-process.on('SIGINT', exit);
