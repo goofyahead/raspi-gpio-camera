@@ -21,28 +21,32 @@ button.watch(function(err, value) {
 
     //send sigusr1
     var current = new Date().getTime();
+    var timeStamp1delay;
     if (current - timestamp > 300){
     	timestamp = current;
-    	console.log('button pressed!');
+    	console.log('button pressed! ' + current);
 
     	setTimeout(function () {
     		console.log('starting delayed video.');
+    		timeStamp1delay = new Date().getTime();
+    		console.log('elapsed: ' + ( timeStamp1delay - current);
     		var raspivid  = spawn('raspivid', ['-n', 
     			'-o', 'first.h264', 
     			'-i', 'pause', 
     			'-td', '30000,3000',
-	    	//'-t', '20000',
-	    	'-w', '1280', 
-	    	'-h', '720', 
-	    	'-fps', '25', 
-	    	'-vf']);
+	    		'-w', '1280', 
+	    		'-h', '720', 
+	    		'-fps', '25', 
+	    		'-vf']);
 
     		raspivid.on('close', function (code, signal) {
     			console.log('child process terminated due to receipt of signal '+signal + ' and code ' + code);
     		});
 
     		var iv = setInterval(function() {
-		    	console.log('step ' + count);
+    			if (count == 0) {
+    				console.log('elapsed: ' + (new Date().getTime() - timeStamp1delay) );
+    			}
 		    	if (count == 400){
 		    		clearInterval(iv);
 		    		count = 0;
