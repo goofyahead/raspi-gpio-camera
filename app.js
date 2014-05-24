@@ -50,7 +50,7 @@ button.watch(function(err, value) {
     				console.log('elapsed: ' + (startedVideo - timeStamp1delay));
     			}
 		    	if (count == 400){
-		    		Log.d('video of ' + (new Date().getTime() - startedVideo));
+		    		console.log('video of ' + (new Date().getTime() - startedVideo));
 		    		clearInterval(iv);
 		    		count = 0;
 		    		//send sigterm or sigints
