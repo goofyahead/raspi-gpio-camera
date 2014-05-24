@@ -22,6 +22,7 @@ button.watch(function(err, value) {
     //send sigusr1
     var current = new Date().getTime();
     var timeStamp1delay;
+    var startedVideo;
     if (current - timestamp > 300){
     	timestamp = current;
     	console.log('button pressed! ' + current);
@@ -45,9 +46,11 @@ button.watch(function(err, value) {
 
     		var iv = setInterval(function() {
     			if (count == 0) {
-    				console.log('elapsed: ' + (new Date().getTime() - timeStamp1delay));
+    				startedVideo = new Date().getTime();
+    				console.log('elapsed: ' + (startedVideo - timeStamp1delay));
     			}
 		    	if (count == 400){
+		    		Log.d('video of ' + (new Date().getTime() - startedVideo));
 		    		clearInterval(iv);
 		    		count = 0;
 		    		//send sigterm or sigints
