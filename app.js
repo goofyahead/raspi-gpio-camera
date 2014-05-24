@@ -27,11 +27,7 @@ button.watch(function(err, value) {
     	timestamp = current;
     	console.log('button pressed! ' + current);
 
-    	setTimeout(function () {
-    		console.log('starting delayed video.');
-    		timeStamp1delay = new Date().getTime();
-    		console.log('elapsed: ' + ( timeStamp1delay - current));
-    		var raspivid  = spawn('raspivid', ['-n', 
+		var raspivid  = spawn('raspivid', ['-n', 
     			'-o', 'first.h264', 
     			'-i', 'pause', 
     			'-td', '30000,3000',
@@ -40,9 +36,15 @@ button.watch(function(err, value) {
 	    		'-fps', '25', 
 	    		'-vf']);
 
-    		raspivid.on('close', function (code, signal) {
-    			console.log('child process terminated due to receipt of signal '+signal + ' and code ' + code);
-    		});
+		raspivid.on('close', function (code, signal) {
+			console.log('child process terminated due to receipt of signal '+signal + ' and code ' + code);
+		});
+
+    	setTimeout(function () {
+    		console.log('starting delayed video.');
+    		timeStamp1delay = new Date().getTime();
+    		console.log('elapsed: ' + ( timeStamp1delay - current));
+    		
 
     		var iv = setInterval(function() {
     			if (count == 0) {
