@@ -3,16 +3,15 @@ var Gpio = require('onoff').Gpio;
 
 var step = new Gpio(23,'out');
 var iv;
-var stepStatus = 0;
 var timestamp = 0;
 var count = 0;
-var SPEED = 100;
+var SPEED = 30;
 
 console.log('rotating');
+step.writeSync(0);
 
 iv = setInterval(function() {
-	//console.log('step ' + stepStatus);
-	if (count == 100){
+	if (count == 400){
 		clearInterval(iv);
 		count = 0;
 		//send sigterm or sigints
@@ -21,7 +20,7 @@ iv = setInterval(function() {
 
 	count++;
 	console.log('step');
-	step.writeSync(stepStatus === 0 ? 1 : 0); // 1 = on, 0 = off :)
-	stepStatus = stepStatus === 0 ? 1 : 0;
+	step.writeSync(1); // 1 = on, 0 = off :)
+	step.writeSync(0);
 }, SPEED);
     
