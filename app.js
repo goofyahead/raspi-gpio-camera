@@ -29,7 +29,7 @@ button.watch(function(err, value) {
     	setTimeout(function () {
     		console.log('starting delayed video.');
     		timeStamp1delay = new Date().getTime();
-    		console.log('elapsed: ' + ( timeStamp1delay - current);
+    		console.log('elapsed: ' + ( timeStamp1delay - current));
     		var raspivid  = spawn('raspivid', ['-n', 
     			'-o', 'first.h264', 
     			'-i', 'pause', 
@@ -45,7 +45,7 @@ button.watch(function(err, value) {
 
     		var iv = setInterval(function() {
     			if (count == 0) {
-    				console.log('elapsed: ' + (new Date().getTime() - timeStamp1delay) );
+    				console.log('elapsed: ' + (new Date().getTime() - timeStamp1delay));
     			}
 		    	if (count == 400){
 		    		clearInterval(iv);
