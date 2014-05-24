@@ -30,7 +30,7 @@ button.watch(function(err, value) {
 	    var raspivid  = spawn('raspivid', ['-n', 
 	    	'-o', 'first.h264', 
 	    	'-i', 'pause',
-	    	'-td', '0,100',
+	    	'-td', '20000,100',
 	    	'-w', '1280', 
 	    	'-h', '720', 
 	    	'-fps', '30', 
@@ -47,7 +47,6 @@ button.watch(function(err, value) {
 	    		count = 0;
 	    		//send sigterm or sigints
 	    		raspivid.kill();
-
 	    		console.log('quiting after loop');
 	    	}
 
