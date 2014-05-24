@@ -26,34 +26,37 @@ button.watch(function(err, value) {
     	timestamp = current;
     	console.log('button pressed!');
 
-    	
-	    var raspivid  = spawn('raspivid', ['-n', 
+    	setTimeout(function () {
+    		console.log('starting delayed video.');
+			var raspivid  = spawn('raspivid', ['-n', 
 	    	'-o', 'first.h264', 
-	    	//'-i', 'pause', -td time,200
-	    	'-t', '20000',
+	    	'-i', 'pause', 
+	    	'-td', '20000,200',
+	    	//'-t', '20000',
 	    	'-w', '1280', 
 	    	'-h', '720', 
 	    	'-fps', '30', 
 	    	'-vf']);
 
-		raspivid.on('close', function (code, signal) {
-		  console.log('child process terminated due to receipt of signal '+signal + ' and code ' + code);
-		});
+			raspivid.on('close', function (code, signal) {
+			  console.log('child process terminated due to receipt of signal '+signal + ' and code ' + code);
+			});
 
-	    iv = setInterval(function() {
-	    	//console.log('step ' + stepStatus);
-	    	if (count == 400){
-	    		clearInterval(iv);
-	    		count = 0;
-	    		//send sigterm or sigints
-	    		raspivid.kill();
-	    		console.log('quiting after loop');
-	    	}
+		    iv = setInterval(function() {
+		    	//console.log('step ' + stepStatus);
+		    	if (count == 400){
+		    		clearInterval(iv);
+		    		count = 0;
+		    		//send sigterm or sigints
+		    		raspivid.kill();
+		    		console.log('quiting after loop');
+		    	}
 
-	    	count++;
-	    	step.writeSync(1); // 1 = on, 0 = off :)
-	    	step.writeSync(0);
-		}, SPEED);
+		    	count++;
+		    	step.writeSync(1); // 1 = on, 0 = off :)
+		    	step.writeSync(0);
+			}, SPEED);
+	    	},200);
     }
 });
 
