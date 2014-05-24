@@ -30,7 +30,7 @@ button.watch(function(err, value) {
 		var raspivid  = spawn('raspivid', ['-n', 
     			'-o', 'first.h264', 
     			'-i', 'pause', 
-    			'-td', '30000,3000',
+    			'-td', '30000,2900',
 	    		'-w', '1280', 
 	    		'-h', '720', 
 	    		'-fps', '25', 
