@@ -1,15 +1,14 @@
 
 var Gpio = require('onoff').Gpio;
-var button = new Gpio(17, 'in','falling');
-var step = new Gpio(24,'out');
-var direction = new Gpio(23,'out');
+
+var step = new Gpio(23,'out');
+var button = new Gpio(24,'in','falling');
 var iv;
-var stepStatus = 0;
 var timestamp = 0;
 var count = 0;
-var SPEED = 5;
+var SPEED = 30;
 
-console.log('on waiting');
+console.log('on waiting...');
 
 // var exec = require('child_process').exec,
 //     child;
@@ -29,9 +28,9 @@ button.watch(function(err, value) {
 
     	
 	    var raspivid  = spawn('raspivid', ['-n', 
-	    	'-o', 'video1.h264', 
-	    	'-td', '20000,100',
+	    	'-o', 'first.h264', 
 	    	'-i', 'pause',
+	    	'-td', '0,100',
 	    	'-w', '1280', 
 	    	'-h', '720', 
 	    	'-fps', '30', 
@@ -41,11 +40,9 @@ button.watch(function(err, value) {
 		  console.log('child process terminated due to receipt of signal '+signal + ' and code ' + code);
 		});
 
-		count++;
-
 	    iv = setInterval(function() {
 	    	//console.log('step ' + stepStatus);
-	    	if (count == 3501){
+	    	if (count == 400){
 	    		clearInterval(iv);
 	    		count = 0;
 	    		//send sigterm or sigints
@@ -55,8 +52,8 @@ button.watch(function(err, value) {
 	    	}
 
 	    	count++;
-	    	step.writeSync(stepStatus === 0 ? 1 : 0); // 1 = on, 0 = off :)
-	    	stepStatus = stepStatus === 0 ? 1 : 0;
+	    	step.writeSync(1); // 1 = on, 0 = off :)
+	    	step.writeSync(0);
 		}, SPEED);
     }
 });
