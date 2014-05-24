@@ -25,16 +25,16 @@ button.watch(function(err, value) {
     	timestamp = current;
     	console.log('button pressed!');
 
-    	//setTimeout(function () {
+    	setTimeout(function () {
     		console.log('starting delayed video.');
     		var raspivid  = spawn('raspivid', ['-n', 
     			'-o', 'first.h264', 
     			'-i', 'pause', 
-    			'-td', '20000,1000',
+    			'-td', '30000,3000',
 	    	//'-t', '20000',
 	    	'-w', '1280', 
 	    	'-h', '720', 
-	    	'-fps', '30', 
+	    	'-fps', '25', 
 	    	'-vf']);
 
     		raspivid.on('close', function (code, signal) {
@@ -42,7 +42,7 @@ button.watch(function(err, value) {
     		});
 
     		var iv = setInterval(function() {
-		    	//console.log('step ' + stepStatus);
+		    	console.log('step ' + count);
 		    	if (count == 400){
 		    		clearInterval(iv);
 		    		count = 0;
@@ -58,6 +58,6 @@ button.watch(function(err, value) {
     			step.writeSync(0);
     		}, SPEED);
 
-    	//},1000);
+    	},3000);
     }
 });
