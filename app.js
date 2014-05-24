@@ -30,7 +30,7 @@ button.watch(function(err, value) {
     		var raspivid  = spawn('raspivid', ['-n', 
     			'-o', 'first.h264', 
     			'-i', 'pause', 
-    			'-td', '20000,1000',
+    			'-td', '20000,600',
 	    	//'-t', '20000',
 	    	'-w', '1280', 
 	    	'-h', '720', 
@@ -43,7 +43,7 @@ button.watch(function(err, value) {
 
     		var iv = setInterval(function() {
 		    	//console.log('step ' + stepStatus);
-		    	if (count == 400){
+		    	if (count == 420){
 		    		clearInterval(iv);
 		    		count = 0;
 		    		//send sigterm or sigints
