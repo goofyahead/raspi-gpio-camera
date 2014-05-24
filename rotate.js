@@ -6,7 +6,7 @@ var iv;
 var stepStatus = 0;
 var timestamp = 0;
 var count = 0;
-var SPEED = 1s00;
+var SPEED = 100;
 
 console.log('rotating');
 
