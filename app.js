@@ -25,7 +25,7 @@ button.watch(function(err, value) {
     	timestamp = current;
     	console.log('button pressed!');
 
-    	setTimeout(function () {
+    	//setTimeout(function () {
     		console.log('starting delayed video.');
     		var raspivid  = spawn('raspivid', ['-n', 
     			'-o', 'first.h264', 
@@ -49,7 +49,7 @@ button.watch(function(err, value) {
 		    		//send sigterm or sigints
 		    		raspivid.kill();
 		    		button.unexport();
-		    		process.exit();
+		    		//process.exit();
 		    		console.log('quiting after loop');
 		    	}
 
@@ -58,6 +58,6 @@ button.watch(function(err, value) {
     			step.writeSync(0);
     		}, SPEED);
 
-    	},1000);
+    	//},1000);
     }
 });
