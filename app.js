@@ -51,7 +51,7 @@ button.watch(function(err, value) {
     				startedVideo = new Date().getTime();
     				console.log('elapsed: ' + (startedVideo - timeStamp1delay));
     			}
-		    	if (count == 400){
+		    	if (count == 410){
 		    		console.log('video of ' + (new Date().getTime() - startedVideo));
 		    		clearInterval(iv);
 		    		count = 0;
