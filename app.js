@@ -31,8 +31,9 @@ button.watch(function(err, value) {
     			'-o', 'first.h264', 
     			'-i', 'pause', 
     			'-td', '30000,2900',
-	    		// '-w', '1280', 
-	    		// '-h', '720
+	    		'-w', '1280', 
+	    		'-h', '720',
+                '-fps', '25',
                 '-awb', 'sun',
 	    		'-vf']);
 
