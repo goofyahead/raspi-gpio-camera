@@ -34,7 +34,10 @@ button.watch(function(err, value) {
 	    		'-w', '1280', 
 	    		'-h', '720',
                 '-fps', '25',
-                '-awb', 'sun',
+                '-awb', 'off',
+                '-awbg', '1.5,1.2',
+                '-ISO', '100',
+                '-ss', '10000',
 	    		'-vf']);
 
 		raspivid.on('close', function (code, signal) {
