@@ -4,7 +4,8 @@
   "description": "Action listener for raspberry pi",
   "dependencies": {
     "onoff": "*",
-    "redis": "*"
+    "redis": "*",
+    "colors" : "*"
   },
   "scripts" : {
     "start" : "node app.js"

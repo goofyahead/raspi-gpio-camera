@@ -3,6 +3,7 @@ var Gpio = require('onoff').Gpio;
 
 var step = new Gpio(23,'out');
 var button = new Gpio(24,'in','falling');
+var colors = require('colors');
 var timestamp = 0;
 var count = 0;
 var SPEED = 30;
@@ -61,9 +62,9 @@ button.watch(function(err, value) {
 		    		count = 0;
 		    		//send sigterm or sigints
 		    		raspivid.kill();
-		    		button.unexport();
+		    		//button.unexport();
 		    		//process.exit();
-		    		console.log('quiting after loop');
+		    		console.log('WAITING FOR NEXT VIDEO TO BE RECORDED'.green);
 		    	}
 
 		    	count++;
