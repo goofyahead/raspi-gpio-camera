@@ -42,7 +42,7 @@ button.watch(function(err, value) {
 
 		raspivid.on('close', function (code, signal) {
 			console.log('child process terminated due to receipt of signal '+signal + ' and code ' + code);
-		});
+        });
 
     	setTimeout(function () {
     		console.log('starting delayed video.');

@@ -3,6 +3,10 @@
   "version": "0.0.1",
   "description": "Action listener for raspberry pi",
   "dependencies": {
-    "onoff": "*"
+    "onoff": "*",
+    "redis": "*"
+  },
+  "scripts" : {
+    "start" : "node app.js"
   }
 }
