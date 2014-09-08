@@ -9,7 +9,8 @@
     "redis" : "*",
     "request" : "*",
     "form-data" : "*",
-    "http-post" : "*"
+    "http-post" : "*",
+    "node-uuid" : "*"
   },
   "scripts" : {
     "start" : "node app.js"
