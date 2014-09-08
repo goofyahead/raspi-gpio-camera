@@ -8,13 +8,36 @@ var timestamp = 0;
 var count = 0;
 var SPEED = 30;
 
-console.log('on waiting...');
+var request = require('request');
+var FormData = require('form-data');
+var http = require('http');
+var fs = require('fs');
+var path = require('path');
+http.post = require('http-post');
+var uuid = require('node-uuid');
+
+var redis = require("redis"),
+client = redis.createClient();
+
+console.log('on waiting for first pulse...'.yellow);
 
 // var exec = require('child_process').exec,
 //     child;
 var spawn = require('child_process').spawn;
 
 var counter = 0;
+var HASH = '';
+var HOST = '';
+
+client.get('HOSTADDRESS', function (err, data){
+    if (err) throw err;
+    HOST = data;
+});
+
+client.get('HASH', function (err, data) {
+    if (err) throw err;
+    HASH = data;
+});
 
 button.watch(function(err, value) {
 	if (err) exit();
@@ -65,6 +88,21 @@ button.watch(function(err, value) {
 		    		//button.unexport();
 		    		//process.exit();
 		    		console.log('WAITING FOR NEXT VIDEO TO BE RECORDED'.green);
+
+                    var r = request.post({
+                        url : HOST + '/api/video-upload',
+                        headers : {
+                            authorization : HASH
+                        }
+                        }, function optionalCallback (err, httpResponse, body) {
+                          if (err) {
+                            return console.error('upload failed:', err);
+                        }
+                        console.log('Upload successful!  Server responded with:', body);
+                    })
+                    var form = r.form()
+                    form.append('filename', 'auto_' + uuid.v4());
+                    form.append('uploadingVideo', fs.createReadStream(path.join(__dirname, 'first.h264')))
 		    	}
 
 		    	count++;

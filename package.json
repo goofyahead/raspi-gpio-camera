@@ -5,7 +5,8 @@
   "dependencies": {
     "onoff": "*",
     "redis": "*",
-    "colors" : "*"
+    "colors" : "*",
+    "redis" : "*"
   },
   "scripts" : {
     "start" : "node app.js"
