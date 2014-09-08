@@ -6,7 +6,10 @@
     "onoff": "*",
     "redis": "*",
     "colors" : "*",
-    "redis" : "*"
+    "redis" : "*",
+    "request" : "*",
+    "form-data" : "*",
+    "http-post" : "*"
   },
   "scripts" : {
     "start" : "node app.js"
