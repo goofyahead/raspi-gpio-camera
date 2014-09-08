@@ -89,6 +89,8 @@ button.watch(function(err, value) {
 		    		//process.exit();
 		    		console.log('WAITING FOR NEXT VIDEO TO BE RECORDED'.green);
 
+                    console.log('UPLOADING NOW TO :'.green + HOST + '/api/video-upload');
+                    
                     var r = request.post({
                         url : HOST + '/api/video-upload',
                         headers : {
