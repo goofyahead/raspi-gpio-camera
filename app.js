@@ -37,7 +37,13 @@ button.watch(function(err, value) {
         timestamp = current;
         console.log('button pressed! ' + current);
 
-        var raspivid  = spawn('raspivid', ['-n',
+        // take picture when finished record video
+        var takePicture = spawn('raspistill', ['-o', 'picture.jpg']);
+
+        takePicture.on('close', function (code, signal) {
+            console.log('picture taken now take video');
+
+            var raspivid  = spawn('raspivid', ['-n',
             '-o', 'first.h264',
             '-i', 'pause',
             '-td', '30000,2900',
@@ -52,7 +58,6 @@ button.watch(function(err, value) {
 
         raspivid.on('close', function (code, signal) {
             console.log('child process terminated due to receipt of signal '+signal + ' and code ' + code);
-
             // here we can launch raspiStill
         });
 
@@ -89,7 +94,9 @@ button.watch(function(err, value) {
                             console.log('Upload successful!  Server responded with:', body);
                         }
                     );
+                    
                     var form = r.form();
+                    form.append('uploadPicture', fs.createReadStream(path.join(__dirname, 'picture.jpg')));
                     form.append('filename', 'auto_' + uuid.v4());
                     form.append('uploadingVideo', fs.createReadStream(path.join(__dirname, 'first.h264')));
                 }
@@ -100,5 +107,7 @@ button.watch(function(err, value) {
             }, SPEED);
 
         },3000);
+
+        });
     }
 });
