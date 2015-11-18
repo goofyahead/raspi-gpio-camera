@@ -23,6 +23,7 @@ console.log('on waiting for first pulse...'.yellow);
 var spawn = require('child_process').spawn;
 
 var counter = 0;
+var status = 0;
 var HOST = 'http://kaprika.ngrok.io';
 
 button.watch(function(err, value) {
@@ -38,7 +39,7 @@ button.watch(function(err, value) {
         console.log('button pressed! ' + current);
 
         // take picture when finished record video
-        var takePicture = spawn('raspistill', ['-o', 'picture.jpg']);
+        var takePicture = spawn('raspistill', ['-w','1280','-h','720','-o', 'picture.jpg']);
 
         takePicture.on('close', function (code, signal) {
             console.log('picture taken now take video');
@@ -49,12 +50,7 @@ button.watch(function(err, value) {
             '-td', '30000,2900',
             '-w', '1280',
             '-h', '720',
-            '-fps', '25',
-            '-awb', 'off',
-            '-awbg', '1.5,1.2',
-            '-ISO', '100',
-            '-ss', '10000',
-            '-vf']);
+            '-fps', '25']);
 
         raspivid.on('close', function (code, signal) {
             console.log('child process terminated due to receipt of signal '+signal + ' and code ' + code);
@@ -72,7 +68,7 @@ button.watch(function(err, value) {
                     startedVideo = new Date().getTime();
                     console.log('elapsed: ' + (startedVideo - timeStamp1delay));
                 }
-                if (count == 420){
+                if (count == 410){
                     console.log('video of ' + (new Date().getTime() - startedVideo));
                     clearInterval(iv);
                     count = 0;
@@ -102,8 +98,9 @@ button.watch(function(err, value) {
                 }
 
                 count++;
-                step.writeSync(1); // 1 = on, 0 = off :)
-                step.writeSync(0);
+		//console.log('step' + status);
+                step.writeSync(status == 1 ? 0 : 1); // 1 = on, 0 = off :)
+                status = status == 1 ? 0 : 1;
             }, SPEED);
 
         },3000);
