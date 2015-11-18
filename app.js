@@ -24,7 +24,7 @@ var spawn = require('child_process').spawn;
 
 var counter = 0;
 var status = 0;
-var HOST = 'http://kaprika.ngrok.io';
+var HOST = 'http://52.16.183.15';
 
 button.watch(function(err, value) {
     if (err) exit();
