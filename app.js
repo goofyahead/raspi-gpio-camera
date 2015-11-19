@@ -50,7 +50,7 @@ button.watch(function(err, value) {
             '-td', '30000,2900',
             '-w', '1280',
             '-h', '720',
-            '-fps', '25']);
+            '-fps', '30']);
 
         raspivid.on('close', function (code, signal) {
             console.log('child process terminated due to receipt of signal '+signal + ' and code ' + code);
