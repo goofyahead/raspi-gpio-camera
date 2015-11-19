@@ -39,7 +39,7 @@ button.watch(function(err, value) {
         console.log('button pressed! ' + current);
 
         // take picture when finished record video
-        var takePicture = spawn('raspistill', ['-w','640','-h','480','-o', 'picture.jpg']);
+        var takePicture = spawn('raspistill', ['-w','1280','-h','720','-o', 'picture.jpg']);
 
         takePicture.on('close', function (code, signal) {
             console.log('picture taken now take video');
