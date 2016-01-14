@@ -1,0 +1,7 @@
+{
+    "name": "Raspi gpio camera",
+    "tags": ["Raspberry pi", "video processing", "nodejs", "python"],
+    "picture": "https://github.com/goofyahead/raspi-gpio-camera/portfolio.png",
+    "description": "Project to get video and pictures from the raspi",
+    "url": "https://github.com/goofyahead/raspi-gpio-camera"
+}
